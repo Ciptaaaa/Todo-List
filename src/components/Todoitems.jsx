@@ -2,6 +2,7 @@ import React from "react";
 import tick from "../assets/tick.png";
 import not_tick from "../assets/not_tick.png";
 import delete_icon from "../assets/delete.png";
+
 const Todoitems = ({
   text,
   id,
@@ -29,7 +30,7 @@ const Todoitems = ({
         </span>
         <div className="text-sm text-gray-500 mt-1 ml-2">
           Priority:{" "}
-          <span className={`font-bold text-${getCategoryColor(category)}`}>
+          <span className={`font-bold ${getCategoryColor(category)}`}>
             {category}
           </span>
         </div>
@@ -48,16 +49,19 @@ const Todoitems = ({
     </div>
   );
 };
+
+// Fungsi untuk mendapatkan warna kategori
 const getCategoryColor = (category) => {
   switch (category) {
     case "High":
-      return "red-500";
+      return "text-red-500"; // Kelas Tailwind untuk warna merah
     case "Medium":
-      return "yellow-500";
+      return "text-yellow-500"; // Kelas Tailwind untuk warna kuning
     case "Low":
-      return "green-500";
+      return "text-green-500"; // Kelas Tailwind untuk warna hijau
     default:
-      return "gray-500";
+      return "text-gray-500"; // Default jika tidak ada kategori
   }
 };
+
 export default Todoitems;

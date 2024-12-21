@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import todo_icon from "../assets/todo_icon.png";
 import Todoitems from "./Todoitems";
+
 const Todo = () => {
   //untuk menyimpan todo list agar tidak menghilang saat website di refresh maupun di close
   const [todoList, setTodoList] = useState(
@@ -11,6 +12,7 @@ const Todo = () => {
 
   const inputRef = useRef();
   const categoryRef = useRef();
+
   //menambahkan data todo list
   const add = () => {
     const inputText = inputRef.current.value.trim();
@@ -18,6 +20,7 @@ const Todo = () => {
     if (inputText === "" || selectedCategory === "") {
       return null;
     }
+
     //membuat daftar baru todo list
     const newTodo = {
       id: Date.now(),
@@ -38,12 +41,14 @@ const Todo = () => {
     inputRef.current.value = "";
     categoryRef.current.value = "";
   };
+
   //menghapus todolist
   const deleteTodo = (id) => {
     setTodoList((prvTodos) => {
       return prvTodos.filter((todo) => todo.id !== id);
     });
   };
+
   //untuk checklist/unchecklist todo
   const toggle = (id) => {
     setTodoList((prevTodo) => {
@@ -55,6 +60,7 @@ const Todo = () => {
       });
     });
   };
+
   useEffect(() => {
     //menyimpan data di local storage
     localStorage.setItem("todos", JSON.stringify(todoList));
@@ -71,16 +77,16 @@ const Todo = () => {
       </div>
 
       {/* Input Box */}
-      <div className="flex items-center my-6 sm:my-8 bg-gray-200 rounded-full gap-4">
+      <div className="flex flex-col sm:flex-row items-center gap-4 my-6 sm:my-8 bg-gray-200 ">
         <input
           ref={inputRef}
-          className="bg-transparent border-0 outline-none flex-1 h-12 sm:h-14 pl-4 sm:pl-6 pr-2 placeholder:text-slate-600"
+          className="bg-transparent border-0 outline-none flex-1 h-12 sm:h-14 pl-4 sm:pl-6 pr-2 placeholder:text-slate-600 mb-4 sm:mb-0 w-full"
           type="text"
           placeholder="Add your task"
         />
         <select
           ref={categoryRef}
-          className="bg-gray-200 border-0 rounded-full h-10 px-4 outline-none text-slate-600"
+          className="bg-gray-200 border-0 rounded-full h-12 sm:h-14 px-4 outline-none text-slate-600 mb-4 sm:mb-0 w-full sm:w-auto"
           defaultValue=""
         >
           <option value="" disabled>
@@ -90,11 +96,8 @@ const Todo = () => {
           <option value="Medium">Medium</option>
           <option value="High">High</option>
         </select>
-        <button
-          onClick={add}
-          className="border-none rounded-full bg-orange-600 w-28 sm:w-32 h-12 sm:h-14 text-white text-sm sm:text-lg font-medium cursor-pointer"
-        >
-          ADD +
+        <button class="border-none  bg-orange-600 w-full sm:w-32 h-12 sm:h-14 text-white text-sm sm:text-lg font-medium cursor-pointer mt-4 sm:mt-0 flex justify-center items-center">
+          Add task!
         </button>
       </div>
 
